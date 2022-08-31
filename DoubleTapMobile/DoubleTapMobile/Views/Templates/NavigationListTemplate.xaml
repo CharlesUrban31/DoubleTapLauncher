@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Grid
+    x:Class="DoubleTapMobile.Views.Templates.NavigationListTemplate"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:viewModel="clr-namespace:DoubleTapMobile.ViewModels">
+
+    <Grid
+        ColumnDefinitions="120, *"
+        ColumnSpacing="0"
+        RowSpacing="0">
+
+        <!--  Image to display the Item  -->
+        <Image
+            Aspect="AspectFill"
+            BackgroundColor="{DynamicResource Gray-200}"
+            HeightRequest="120"
+            WidthRequest="120">
+            <Image.Source>
+                <UriImageSource
+                    CacheValidity="14"
+                    CachingEnabled="true"
+                    Uri="{Binding ItemImage}" />
+            </Image.Source>
+        </Image>
+        <StackLayout
+            Grid.Column="1"
+            Padding="16"
+            HorizontalOptions="FillAndExpand"
+            Spacing="0"
+            VerticalOptions="FillAndExpand">
+
+            <!--  Name of the item  -->
+            <Label
+                HorizontalOptions="Start"
+                HorizontalTextAlignment="Start"
+                Style="{StaticResource TitleLabelStyle}"
+                Text="{Binding ItemName}" />
+
+            <!--  Description about the item  -->
+            <Label
+                Margin="0,4,0,8"
+                FontSize="12"
+                HorizontalOptions="Start"
+                HorizontalTextAlignment="Start"
+                LineBreakMode="TailTruncation"
+                LineHeight="{OnPlatform Android=1.25,
+                                        Default=-1}"
+                MaxLines="2"
+                Style="{StaticResource DescriptionLabelStyle}"
+                Text="{Binding ItemDescription}" />
+
+            <!--  Average rating from the overall rating  -->
+            <StackLayout
+                HorizontalOptions="FillAndExpand"
+                Orientation="Horizontal"
+                Spacing="0"
+                VerticalOptions="EndAndExpand">
+                <Label
+                    Margin="0,0,4,0"
+                    FontFamily="FontIcons"
+                    FontSize="16"
+                    Text="{StaticResource Rating}"
+                    TextColor="{DynamicResource PrimaryColor}"
+                    VerticalOptions="Center"
+                    WidthRequest="16" />
+                <Label
+                    FontFamily="Montserrat-Regular"
+                    FontSize="12"
+                    LineHeight="{OnPlatform Android=1.5,
+                                            Default=-1}"
+                    Text="{Binding ItemRating}"
+                    TextColor="{DynamicResource Gray-700}"
+                    VerticalOptions="Center">
+                    <Label.Margin>
+                        <OnPlatform
+                            x:Type="Thickness"
+                            Default="0,4,0,0"
+                            UWP="0,6,0,0" />
+                    </Label.Margin>
+                </Label>
+
+                <!--  Navigation icon  -->
+                <button:SfButton
+                    BackgroundColor="Transparent"
+                    Command="{Binding ItemTappedCommand}"
+                    CornerRadius="4"
+                    FontFamily="FontIcons"
+                    FontSize="14"
+                    HorizontalOptions="EndAndExpand"
+                    Text="{StaticResource ArrowRight}"
+                    TextColor="{DynamicResource Gray-600}"
+                    VerticalOptions="Center">
+                    <button:SfButton.BindingContext>
+                        <viewModel:NavigationViewModel />
+                    </button:SfButton.BindingContext>
+                </button:SfButton>
+
+            </StackLayout>
+        </StackLayout>
+    </Grid>
+</Grid>
